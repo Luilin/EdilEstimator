@@ -158,13 +158,40 @@ export async function getProjectsWithCache(): Promise<{ data: Project[]; error: 
 
   try {
     const remote = await fetchRemoteProjects();
-    const remoteIds = new Set(remote.map((project) => project.id));
 
-    // Rimuove dalla cache i progetti che non esistono più sul server.
-    const cached = await localProjects.getProjects();
-    for (const project of cached.data) {
-      if (!remoteIds.has(project.id)) {
-        await idbDelete(STORE_PROJECTS, project.id);
+    // Primo collegamento al cloud: se il database è vuoto, carica i progetti
+    // che esistono già in locale (una sola volta per utente).
+    const migrationKey = `edil_cloud_migrated_${user.uid}`;
+    const alreadyMigrated = typeof window !== 'undefined'
+      && window.localStorage.getItem(migrationKey) === '1';
+
+    if (remote.length === 0 && !alreadyMigrated) {
+      const cached = await localProjects.getProjects();
+      if (cached.data.length === 0) {
+        if (typeof window !== 'undefined') window.localStorage.setItem(migrationKey, '1');
+      } else {
+        const migrated: Project[] = [];
+        let failed = false;
+        for (const project of cached.data) {
+          try {
+            const clone = {
+              ...(JSON.parse(JSON.stringify(project)) as Project),
+              userId: user.uid,
+            };
+            await upsertRemoteProject(clone);
+            await idbPut(STORE_PROJECTS, clone);
+            migrated.push(clone);
+          } catch (migrationError) {
+            failed = true;
+            console.warn('Migrazione progetto non riuscita:', project.id, migrationError);
+          }
+        }
+        if (!failed) {
+          if (typeof window !== 'undefined') window.localStorage.setItem(migrationKey, '1');
+        }
+        if (migrated.length > 0) {
+          return { data: migrated, error: null };
+        }
       }
     }
 
