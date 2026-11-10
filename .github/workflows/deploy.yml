@@ -32,6 +32,9 @@ jobs:
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          # Finché Supabase non è configurato, il sito resta in modalità locale
+          # (dati nel browser) e non usa Firebase.
+          VITE_LOCAL_MODE: ${{ secrets.VITE_SUPABASE_URL == '' && 'true' || 'false' }}
           # Se il sito è su https://utente.github.io/repository/
           VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH || format('/{0}/', github.event.repository.name) }}
 
