@@ -1,0 +1,26 @@
+{
+  "entities": {
+    "project": {
+      "title": "Project",
+      "description": "A project created by a user containing cost estimation data",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "lastModified": { "type": "number" },
+        "createdBy": { "type": "string" },
+        "userId": { "type": "string" },
+        "rootWBS": { "type": "object" },
+        "sals": { "type": "array" }
+      },
+      "required": ["userId", "name", "rootWBS"]
+    }
+  },
+  "firestore": {
+    "projects/{projectId}": {
+      "schema": { "$ref": "#/entities/project" },
+      "description": "User projects"
+    }
+  }
+}
