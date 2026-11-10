@@ -160,7 +160,7 @@ export function buildXpwe(project: Project): string {
     <TipoFormato>XPWE</TipoFormato>
     <Versione>1.0</Versione>
     <FileNameDocumento>${escapeXml(fileName)}</FileNameDocumento>
-    <Copyright>EdilEstimator</Copyright>
+    <Copyright>Stimia</Copyright>
   </Intestazione>
   <PweDatiGenerali>
     <PweDGProgetto>

@@ -1,5 +1,5 @@
 -- ============================================================
--- EdilEstimator — schema database SQL (Supabase / Postgres)
+-- Stimia — schema database SQL (Supabase / Postgres)
 --
 -- Come usarlo:
 --   1. Apri il progetto su https://supabase.com

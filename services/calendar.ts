@@ -129,7 +129,7 @@ export function buildIcs(_project: Project, events: CalendarEvent[]): string {
   const lines: string[] = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//EdilEstimator//Scadenze progetto//IT',
+    'PRODID:-//Stimia//Scadenze progetto//IT',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
   ];
@@ -138,7 +138,7 @@ export function buildIcs(_project: Project, events: CalendarEvent[]): string {
     const start = icsDate(event.date);
     const end = icsDate(event.date + DAY_MS);
     lines.push('BEGIN:VEVENT');
-    lines.push(`UID:${event.id}@edilestimator`);
+    lines.push(`UID:${event.id}@stimia`);
     lines.push(`DTSTAMP:${stamp}`);
     lines.push(`DTSTART;VALUE=DATE:${start}`);
     lines.push(`DTEND;VALUE=DATE:${end}`);

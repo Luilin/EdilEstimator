@@ -122,7 +122,7 @@ export const DocumentsModal: React.FC<Props> = ({ project, canExport, onClose })
     </thead>
     <tbody>${rowsHtml}</tbody>
   </table>
-  <div class="footer">Documento generato da EdilEstimator il ${new Date().toLocaleString('it-IT')}</div>
+  <div class="footer">Documento generato da Stimia il ${new Date().toLocaleString('it-IT')}</div>
 </body>
 </html>`;
 
@@ -191,7 +191,7 @@ export const DocumentsModal: React.FC<Props> = ({ project, canExport, onClose })
 
   ${sectionsHtml}
 
-  <div class="footer">Documento generato da EdilEstimator il ${new Date().toLocaleString('it-IT')}</div>
+  <div class="footer">Documento generato da Stimia il ${new Date().toLocaleString('it-IT')}</div>
 </body>
 </html>`;
 

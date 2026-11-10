@@ -276,7 +276,7 @@ export const QuadroEconomicoModal: React.FC<Props> = ({ project, canEdit, canExp
   </table>
 
   ${settings.notes ? `<div class="note">${escapeHtml(settings.notes)}</div>` : ''}
-  <div class="footer">Documento generato da EdilEstimator il ${new Date().toLocaleString('it-IT')}</div>
+  <div class="footer">Documento generato da Stimia il ${new Date().toLocaleString('it-IT')}</div>
 </body>
 </html>`;
 

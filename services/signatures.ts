@@ -116,7 +116,7 @@ export function printSignatureReceipt(record: SignatureRecord, project: Project)
     <div>Luogo e data<br/><b>${new Date(record.signedAt).toLocaleDateString('it-IT')}</b></div>
   </div>
 
-  <div class="footer">Documento generato da EdilEstimator il ${new Date().toLocaleString('it-IT')}</div>
+  <div class="footer">Documento generato da Stimia il ${new Date().toLocaleString('it-IT')}</div>
 </body>
 </html>`;
 

@@ -142,5 +142,5 @@ const server = createServer(async (request, response) => {
 });
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`EdilEstimator in ascolto su http://0.0.0.0:${PORT} (static: ${ROOT})`);
+  console.log(`Stimia in ascolto su http://0.0.0.0:${PORT} (static: ${ROOT})`);
 });

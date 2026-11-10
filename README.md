@@ -1,4 +1,4 @@
-# EdilEstimator AI
+# Stimia
 
 Applicazione web per la gestione di computi metrici estimativi: struttura WBS, voci di costo, prezzari, SAL (stati avanzamento lavori), condivisione con team ed export Excel/PDF.
 
@@ -147,7 +147,9 @@ supabase/schema.sql           Tabelle, indici, trigger e policy RLS
 
 In modalità locale i progetti sono salvati in **IndexedDB** (database
 `edilestimator_files`: store `projects`, `priceBooks`, `attachments`, `versions`,
-`syncQueue`). In `localStorage` restano solo sessione e preferenze:
+`syncQueue`). Il nome del database è storico: è rimasto invariato dopo il
+rebrand per non rendere invisibili i dati già salvati nei browser.
+In `localStorage` restano solo sessione e preferenze:
 
 | Chiave | Contenuto |
 | --- | --- |

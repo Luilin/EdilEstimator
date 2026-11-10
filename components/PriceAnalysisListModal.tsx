@@ -296,7 +296,7 @@ export const PriceAnalysisListModal: React.FC<Props> = ({ project, canExport, on
 
   ${analyzed.length > 0 ? `<h2>Dettaglio analisi</h2>${blocksHtml}` : '<p class="muted">Nessuna analisi disponibile.</p>'}
 
-  <p class="muted" style="margin-top:12px">Documento generato da EdilEstimator il ${new Date().toLocaleString('it-IT')}.</p>
+  <p class="muted" style="margin-top:12px">Documento generato da Stimia il ${new Date().toLocaleString('it-IT')}.</p>
 </body>
 </html>`;
 

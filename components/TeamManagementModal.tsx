@@ -263,9 +263,9 @@ export const TeamManagementModal: React.FC<Props> = ({ project, currentUserEmail
   const triggerInviteEmail = (email: string, role: RoleType) => {
     const roleLabel = ROLE_PRESETS[role]?.label || role;
     const appUrl = typeof window !== 'undefined' && window.location.origin ? window.location.origin : 'https://computo-henna.vercel.app';
-    const subject = encodeURIComponent(`Invito a collaborare su EdilEstimator - ${project.name}`);
+    const subject = encodeURIComponent(`Invito a collaborare su Stimia - ${project.name}`);
     const body = encodeURIComponent(
-      `Ciao,\n\nTi ho aggiunto come collaboratore con il ruolo di "${roleLabel}" sul progetto di computo metrico "${project.name}" su EdilEstimator.\n\nPuoi registrarti ed accedere al computo cliccando sul seguente link:\n${appUrl}\n\nUna volta registrato con questa email (${email}), vedrai automaticamente il progetto condiviso nella tua dashboard.\n\nBuon lavoro!`
+      `Ciao,\n\nTi ho aggiunto come collaboratore con il ruolo di "${roleLabel}" sul progetto di computo metrico "${project.name}" su Stimia.\n\nPuoi registrarti ed accedere al computo cliccando sul seguente link:\n${appUrl}\n\nUna volta registrato con questa email (${email}), vedrai automaticamente il progetto condiviso nella tua dashboard.\n\nBuon lavoro!`
     );
     const link = document.createElement('a');
     link.href = `mailto:${email}?subject=${subject}&body=${body}`;
@@ -275,7 +275,7 @@ export const TeamManagementModal: React.FC<Props> = ({ project, currentUserEmail
   const copyInviteText = (email: string, role: RoleType) => {
     const roleLabel = ROLE_PRESETS[role]?.label || role;
     const appUrl = typeof window !== 'undefined' && window.location.origin ? window.location.origin : 'https://computo-henna.vercel.app';
-    const text = `Ciao! Ti ho aggiunto come collaboratore con il ruolo di "${roleLabel}" sul progetto di computo metrico "${project.name}" su EdilEstimator.\n\nPuoi registrarti ed accedere al computo cliccando qui:\n${appUrl}\n\nRegistrati con l'indirizzo: ${email}`;
+    const text = `Ciao! Ti ho aggiunto come collaboratore con il ruolo di "${roleLabel}" sul progetto di computo metrico "${project.name}" su Stimia.\n\nPuoi registrarti ed accedere al computo cliccando qui:\n${appUrl}\n\nRegistrati con l'indirizzo: ${email}`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);

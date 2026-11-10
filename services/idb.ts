@@ -3,6 +3,8 @@
  * progetti, prezzari, allegati e snapshot delle versioni.
  */
 
+// Il nome del database resta quello storico: cambiarlo renderebbe
+// invisibili i progetti già salvati nel browser degli utenti.
 export const APP_DB_NAME = 'edilestimator_files';
 export const APP_DB_VERSION = 4;
 export const STORE_ATTACHMENTS = 'attachments';

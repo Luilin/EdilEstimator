@@ -85,7 +85,7 @@ const resolveStyles = (options: VectorPdfOptions): VectorPdfStyleInput => {
   const s = options.styles;
 
   const defaults: VectorPdfStyleInput = {
-    appTitle: 'EdilEstimator',
+    appTitle: 'Stimia',
     docTitle: `${project.name} — ${documentLabel(options.document)}`,
     subtitle: project.description || '',
     projectId: project.id.toUpperCase().substring(0, 8),
@@ -1072,7 +1072,7 @@ export async function createVectorPdfBlob(options: VectorPdfOptions): Promise<Ge
     },
     info: {
       title: `${project.name} — ${documentLabel(options.document)}`,
-      author: 'EdilEstimator',
+      author: 'Stimia',
       subject: project.description || '',
     },
     footer: (currentPage: number, pageCount: number) => ({

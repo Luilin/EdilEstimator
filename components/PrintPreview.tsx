@@ -126,7 +126,7 @@ export const PrintPreview: React.FC<PrintPreviewProps> = ({
     // SAL Selection State (Local to print preview)
     const [previewSalId, setPreviewSalId] = useState<string | null>(activeSalId);
 
-    const [printAppTitle, setPrintAppTitle] = useState("EdilEstimator AI");
+    const [printAppTitle, setPrintAppTitle] = useState("Stimia");
     const [printDocTitle, setPrintDocTitle] = useState("");
     const [printSubtitle, setPrintSubtitle] = useState("");
     const [printDate, setPrintDate] = useState("");

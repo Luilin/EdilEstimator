@@ -513,7 +513,7 @@ export const ScheduleModal: React.FC<Props> = ({ project, canEdit, canExport, on
   <h2>Curva di avanzamento</h2>
   <div class="chart">${buildCurveSvg()}</div>
 
-  <p class="muted">Documento generato da EdilEstimator il ${new Date().toLocaleString('it-IT')}.</p>
+  <p class="muted">Documento generato da Stimia il ${new Date().toLocaleString('it-IT')}.</p>
 </body>
 </html>`;
 

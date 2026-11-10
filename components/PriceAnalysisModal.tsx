@@ -191,7 +191,7 @@ export const PriceAnalysisModal: React.FC<Props> = ({ item, canEdit, canExport, 
   ${incidenceHtml ? `<h2>Incidenza sul costo diretto</h2><ul>${incidenceHtml}</ul>` : ''}
   ${notes.trim() ? `<h2>Note</h2><div class="notes">${escapeHtml(notes.trim())}</div>` : ''}
 
-  <p class="muted" style="margin-top:16px">Documento generato da EdilEstimator il ${new Date().toLocaleString('it-IT')}.</p>
+  <p class="muted" style="margin-top:16px">Documento generato da Stimia il ${new Date().toLocaleString('it-IT')}.</p>
 </body>
 </html>`;
 

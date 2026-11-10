@@ -245,7 +245,7 @@ export default function App() {
       })));
 
       const payload = {
-        app: 'EdilEstimator',
+        app: 'Stimia',
         version: 1,
         exportedAt: new Date().toISOString(),
         projects: fullProjects,
@@ -254,7 +254,7 @@ export default function App() {
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `edilestimator_backup_${new Date().toISOString().slice(0, 10)}.json`;
+      link.download = `stimia_backup_${new Date().toISOString().slice(0, 10)}.json`;
       link.click();
       URL.revokeObjectURL(url);
       setBackupMessage(`Backup esportato: ${projects.length} ${projects.length === 1 ? 'computo' : 'computi'}.`);
@@ -408,7 +408,7 @@ export default function App() {
               <HardHat size={26} />
             </div>
             <div className="min-w-0">
-              <h1 className="text-xl font-bold tracking-tight text-slate-900">EdilEstimator</h1>
+              <h1 className="text-xl font-bold tracking-tight text-slate-900">Stimia</h1>
               <p className="text-xs text-slate-500">Computi metrici e contabilità lavori</p>
             </div>
           </div>
@@ -548,7 +548,7 @@ export default function App() {
                 </span>
               )}
               {installPrompt && (
-                <button onClick={handleInstallApp} className="btn btn-neutral" title="Installa EdilEstimator sul dispositivo">
+                <button onClick={handleInstallApp} className="btn btn-neutral" title="Installa Stimia sul dispositivo">
                   <Smartphone size={16} /> <span className="hidden sm:inline">Installa</span>
                 </button>
               )}

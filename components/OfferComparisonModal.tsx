@@ -1028,7 +1028,7 @@ export const OfferComparisonModal: React.FC<Props> = ({ project, canEdit, canExp
       </tr>
     </tfoot>
   </table>
-  <div class="footer">Documento generato da EdilEstimator il ${new Date().toLocaleString('it-IT')}.</div>
+  <div class="footer">Documento generato da Stimia il ${new Date().toLocaleString('it-IT')}.</div>
 </body>
 </html>`;
 
@@ -1148,7 +1148,7 @@ export const OfferComparisonModal: React.FC<Props> = ({ project, canEdit, canExp
     <div class="signature"><div class="line">Per le Imprese</div></div>
   </div>
 
-  <p class="muted" style="margin-top:24px">Documento generato da EdilEstimator il ${new Date().toLocaleString('it-IT')}.</p>
+  <p class="muted" style="margin-top:24px">Documento generato da Stimia il ${new Date().toLocaleString('it-IT')}.</p>
 </body>
 </html>`;
 
