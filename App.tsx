@@ -12,7 +12,7 @@ import {
   externalizePriceBooks,
   hydratePriceBooks,
 } from './services/priceBooksStorage';
-import { HardHat, Users, LogIn, Plus, Trash2, FolderOpen, X, Loader2, AlertCircle, HardDrive, Pencil, Download, Upload, Copy, WifiOff, Smartphone, Cloud } from 'lucide-react';
+import { Users, LogIn, Plus, Trash2, FolderOpen, X, Loader2, AlertCircle, HardDrive, Pencil, Download, Upload, Copy, WifiOff, Smartphone, Cloud } from 'lucide-react';
 import { db } from './services/firebase';
 import { doc, getDocFromServer } from 'firebase/firestore';
 import { AuthUser, onAuthStateChanged, signInWithEmail, signInWithGoogle, signOut } from './services/auth';
@@ -404,9 +404,11 @@ export default function App() {
       <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-100 via-slate-50 to-emerald-50 p-4 sm:p-6">
         <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/60 sm:p-8">
           <div className="mb-6 flex items-center gap-3">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-sm">
-              <HardHat size={26} />
-            </div>
+            <img
+              src={`${import.meta.env.BASE_URL}brand/stimia-badge.png`}
+              alt="Stimia"
+              className="h-12 w-12 shrink-0 rounded-xl shadow-sm"
+            />
             <div className="min-w-0">
               <h1 className="text-xl font-bold tracking-tight text-slate-900">Stimia</h1>
               <p className="text-xs text-slate-500">Computi metrici e contabilità lavori</p>
@@ -512,9 +514,11 @@ export default function App() {
         <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
           <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
             <div className="flex min-w-0 items-center gap-3">
-               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-600 text-white shadow-sm">
-                 <HardHat size={22} />
-               </div>
+               <img
+                 src={`${import.meta.env.BASE_URL}brand/stimia-badge.png`}
+                 alt="Stimia"
+                 className="h-10 w-10 shrink-0 rounded-xl shadow-sm"
+               />
                <div className="min-w-0">
                  <h1 className="truncate text-lg font-bold tracking-tight text-slate-900">I miei computi</h1>
                  <p className="hidden text-xs text-slate-500 sm:block">Panoramica progetti e collaborazioni</p>

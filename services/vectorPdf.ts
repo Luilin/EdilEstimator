@@ -303,8 +303,53 @@ const offerStats = (project: Project) => {
   return { stats, excluded: all.length - stats.length, baseTotal };
 };
 
-const headerContent = (options: VectorPdfOptions) => {
+/** Logo dell'app (PNG) convertito in data URL per pdfmake. */
+let brandBadgeDataUrl: string | null = null;
+let brandBadgePromise: Promise<void> | null = null;
+
+const ensureBrandBadge = async (): Promise<void> => {
+  if (brandBadgeDataUrl) return;
+  if (brandBadgePromise) return brandBadgePromise;
+
+  brandBadgePromise = (async () => {
+    try {
+      const base = import.meta.env.BASE_URL || '/';
+      const response = await fetch(`${base}brand/stimia-badge.png`);
+      if (!response.ok) return;
+      const blob = await response.blob();
+      brandBadgeDataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result));
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(blob);
+      });
+    } catch (error) {
+      console.warn('Logo non disponibile per il PDF:', error);
+    }
+  })();
+
+  return brandBadgePromise;
+};
+
+const headerContent = (options: VectorPdfOptions, badge: string | null = brandBadgeDataUrl) => {
   const s = resolveStyles(options);
+  const isDefaultTitle = s.appTitle.trim().toLowerCase() === 'stimia';
+
+  const titleNode = badge && isDefaultTitle
+    ? {
+        columns: [
+          { width: 34, stack: [{ image: 'brandBadge', width: 34 }] },
+          {
+            width: '*',
+            text: s.appTitle,
+            bold: true,
+            fontSize: pxToPt(s.sizes.title),
+            color: s.colors.title,
+            margin: [8, 5, 0, 0],
+          },
+        ],
+      }
+    : { text: s.appTitle, bold: true, fontSize: pxToPt(s.sizes.title), color: s.colors.title };
 
   return {
     stack: [
@@ -313,7 +358,7 @@ const headerContent = (options: VectorPdfOptions) => {
           {
             width: '*',
             stack: [
-              { text: s.appTitle, bold: true, fontSize: pxToPt(s.sizes.title), color: s.colors.title },
+              titleNode,
               { text: s.docTitle, bold: true, fontSize: pxToPt(s.sizes.docTitle), color: s.colors.docTitle, margin: [0, 3, 0, 0] },
               ...(s.subtitle ? [{ text: s.subtitle, fontSize: pxToPt(s.sizes.desc), color: s.colors.subtitle, margin: [0, 3, 0, 0] }] : []),
             ],
@@ -1060,10 +1105,12 @@ export async function createVectorPdfBlob(options: VectorPdfOptions): Promise<Ge
   const pageNumberColor = options.pageNumberColor || '#475569';
   const pageNumberSize = options.pageNumberSize ? pxToPt(options.pageNumberSize) : 6.75;
   const styles = resolveStyles(options);
+  await ensureBrandBadge();
 
   const docDefinition: any = {
     pageSize: 'A4',
     pageMargins: [mm(15), mm(16), mm(15), mm(18)],
+    ...(brandBadgeDataUrl ? { images: { brandBadge: brandBadgeDataUrl } } : {}),
     defaultStyle: {
       font: 'Roboto',
       fontSize: pxToPt(styles.sizes.body),

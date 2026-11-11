@@ -1292,7 +1292,17 @@ export const PrintPreview: React.FC<PrintPreviewProps> = ({
                           <div className="mb-6 pb-2" style={{ borderBottomWidth: printHeaderLineWidth, borderBottomColor: printBorderColor }}>
                                <div className="flex justify-between items-start">
                                    <div className="max-w-[60%]">
-                                       <h1 className="font-bold tracking-wide leading-tight" style={{ fontSize: printFontSizeTitle, color: printColorTitle, fontFamily: printTitleFont }}>{printAppTitle}</h1>
+                                       <div className="flex items-center gap-2">
+                                           {printAppTitle.trim().toLowerCase() === 'stimia' && (
+                                               <img
+                                                   src={`${import.meta.env.BASE_URL}brand/stimia-badge.png`}
+                                                   alt=""
+                                                   style={{ width: printFontSizeTitle * 1.7, height: printFontSizeTitle * 1.7 }}
+                                                   className="rounded-md"
+                                               />
+                                           )}
+                                           <h1 className="font-bold tracking-wide leading-tight" style={{ fontSize: printFontSizeTitle, color: printColorTitle, fontFamily: printTitleFont }}>{printAppTitle}</h1>
+                                       </div>
                                        <h2 className="mt-2 font-bold leading-tight" style={{ fontSize: printFontSizeDocTitle, color: printColorDocTitle, fontFamily: printTitleFont }}>{printDocTitle}</h2>
                                        {printSubtitle && <p className="mt-2 text-justify" style={{ fontSize: printFontSizeDesc, color: printColorSubtitle, fontFamily: printBodyFont }}>{printSubtitle}</p>}
                                    </div>
