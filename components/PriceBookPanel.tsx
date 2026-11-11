@@ -371,9 +371,9 @@ const CategoryTree: React.FC<CategoryTreeProps> = ({
         if (!isHovering) {
             setIsHovering(true);
             const types = Array.from(e.dataTransfer.types);
-            if (types.includes("application/edil-pb-item-id")) {
+            if (types.includes("application/stimia-pb-item-id")) {
                 setDragType('item');
-            } else if (types.includes("application/edil-items")) {
+            } else if (types.includes("application/stimia-items")) {
                 setDragType('cost_item'); // From Editor
             } else {
                 setDragType('category');
@@ -397,9 +397,9 @@ const CategoryTree: React.FC<CategoryTreeProps> = ({
         setIsHovering(false);
         setDragType(null);
         
-        const sourceCatId = e.dataTransfer.getData("application/edil-pb-cat-id");
-        const sourceItemId = e.dataTransfer.getData("application/edil-pb-item-id");
-        const costItemsData = e.dataTransfer.getData("application/edil-items");
+        const sourceCatId = e.dataTransfer.getData("application/stimia-pb-cat-id");
+        const sourceItemId = e.dataTransfer.getData("application/stimia-pb-item-id");
+        const costItemsData = e.dataTransfer.getData("application/stimia-items");
         
         if (costItemsData && onImportCostItems) {
             try {
@@ -974,10 +974,10 @@ export const PriceBookPanel: React.FC<PriceBookPanelProps> = ({
           catsToDrag = [node];
       }
       const enrichedCats = catsToDrag.map(c => injectSourceInfo(c, activeBookId, c.color));
-      e.dataTransfer.setData("application/edil-price-book-categories", JSON.stringify(enrichedCats));
-      e.dataTransfer.setData("application/edil-pb-cat-id", node.id); 
+      e.dataTransfer.setData("application/stimia-price-book-categories", JSON.stringify(enrichedCats));
+      e.dataTransfer.setData("application/stimia-pb-cat-id", node.id); 
       if (enrichedCats.length === 1) {
-          e.dataTransfer.setData("application/edil-price-book-category", JSON.stringify(enrichedCats[0]));
+          e.dataTransfer.setData("application/stimia-price-book-category", JSON.stringify(enrichedCats[0]));
       }
       e.dataTransfer.effectAllowed = "move";
       const ghost = document.createElement('div');
@@ -1234,9 +1234,9 @@ export const PriceBookPanel: React.FC<PriceBookPanelProps> = ({
           itemsToDrag = visibleItems.filter(i => selectedItemIds.has(i.id));
       }
       const dragData = itemsToDrag.map(i => ({...i, sourceBookId: activeBookId}));
-      e.dataTransfer.setData("application/edil-price-book-items", JSON.stringify(dragData));
-      e.dataTransfer.setData("application/edil-pb-item-id", item.id); 
-      e.dataTransfer.setData("application/edil-price-book-item", JSON.stringify(dragData[0]));
+      e.dataTransfer.setData("application/stimia-price-book-items", JSON.stringify(dragData));
+      e.dataTransfer.setData("application/stimia-pb-item-id", item.id); 
+      e.dataTransfer.setData("application/stimia-price-book-item", JSON.stringify(dragData[0]));
       if (itemsToDrag.length > 1) {
           const ghost = document.createElement('div');
           ghost.style.cssText = `position: absolute; top: -1000px; background: #059669; color: white; padding: 6px 10px; border-radius: 6px; font-weight: bold; font-size: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); z-index: 9999; pointer-events: none;`;
@@ -2177,10 +2177,10 @@ export const PriceBookPanel: React.FC<PriceBookPanelProps> = ({
         onDrop={(e) => {
              e.preventDefault();
              e.stopPropagation();
-             const itemsData = e.dataTransfer.getData("application/edil-items");
+             const itemsData = e.dataTransfer.getData("application/stimia-items");
              if (itemsData) { try { handleAddItemFromDrop(JSON.parse(itemsData)); return; } catch(err) { console.error(err); } }
-             const wbsNodeData = e.dataTransfer.getData("application/edil-wbs-node-data");
-             const wbsNodesData = e.dataTransfer.getData("application/edil-wbs-nodes-data");
+             const wbsNodeData = e.dataTransfer.getData("application/stimia-wbs-node-data");
+             const wbsNodesData = e.dataTransfer.getData("application/stimia-wbs-nodes-data");
              if (wbsNodeData || wbsNodesData) {
                   try {
                       const nodesToImport = wbsNodesData ? JSON.parse(wbsNodesData) : [JSON.parse(wbsNodeData)];
@@ -2196,7 +2196,7 @@ export const PriceBookPanel: React.FC<PriceBookPanelProps> = ({
                       return;
                   } catch(e) { console.error(e); }
              }
-             const itemData = e.dataTransfer.getData("application/edil-price-book-item");
+             const itemData = e.dataTransfer.getData("application/stimia-price-book-item");
              if (itemData) { try { handleAddItemFromDrop(JSON.parse(itemData)); } catch(err) { console.error(err); } }
         }}
     >

@@ -81,17 +81,17 @@ export const WBSTree: React.FC<WBSTreeProps> = ({
     if (isMultiDragging && onGetMultiSelectionData && selectedNodeIds) {
         // Multi-select drag logic
         const ids = Array.from(selectedNodeIds);
-        e.dataTransfer.setData("application/edil-node-ids", JSON.stringify(ids));
+        e.dataTransfer.setData("application/stimia-node-ids", JSON.stringify(ids));
         
         // Serialize FULL DATA for all selected nodes for external drops
         const multiNodesData = onGetMultiSelectionData(ids);
-        e.dataTransfer.setData("application/edil-wbs-nodes-data", JSON.stringify(multiNodesData));
+        e.dataTransfer.setData("application/stimia-wbs-nodes-data", JSON.stringify(multiNodesData));
     } else {
         // Single node logic
-        e.dataTransfer.setData("application/edil-node-id", node.id);
-        e.dataTransfer.setData("application/edil-wbs-node-data", JSON.stringify(node));
+        e.dataTransfer.setData("application/stimia-node-id", node.id);
+        e.dataTransfer.setData("application/stimia-wbs-node-data", JSON.stringify(node));
         // Also send singular array for compatibility
-        e.dataTransfer.setData("application/edil-wbs-nodes-data", JSON.stringify([node]));
+        e.dataTransfer.setData("application/stimia-wbs-nodes-data", JSON.stringify([node]));
     }
 
     e.dataTransfer.effectAllowed = "move";
@@ -130,13 +130,13 @@ export const WBSTree: React.FC<WBSTreeProps> = ({
         setIsHovering(true);
         // Detect what is being dragged based on data types
         const types = Array.from(e.dataTransfer.types);
-        if (types.includes("application/edil-item-id") || types.includes("application/edil-price-book-items") || types.includes("application/edil-pb-item-id") || types.includes("application/edil-items")) {
+        if (types.includes("application/stimia-item-id") || types.includes("application/stimia-price-book-items") || types.includes("application/stimia-pb-item-id") || types.includes("application/stimia-items")) {
             setDragType('item');
             e.dataTransfer.dropEffect = "move";
-        } else if (types.includes("application/edil-node-id")) {
+        } else if (types.includes("application/stimia-node-id")) {
             setDragType('node');
             e.dataTransfer.dropEffect = "move";
-        } else if (types.includes("application/edil-price-book-category") || types.includes("application/edil-price-book-categories")) {
+        } else if (types.includes("application/stimia-price-book-category") || types.includes("application/stimia-price-book-categories")) {
             setDragType('node'); // Treat import as a node drop visually
             e.dataTransfer.dropEffect = "copy";
         }
@@ -162,17 +162,17 @@ export const WBSTree: React.FC<WBSTreeProps> = ({
     setIsHovering(false);
     setDragType(null);
     
-    const itemId = e.dataTransfer.getData("application/edil-item-id");
-    const itemsData = e.dataTransfer.getData("application/edil-items"); // Local multi-item drag
+    const itemId = e.dataTransfer.getData("application/stimia-item-id");
+    const itemsData = e.dataTransfer.getData("application/stimia-items"); // Local multi-item drag
     
-    const draggedNodeId = e.dataTransfer.getData("application/edil-node-id");
+    const draggedNodeId = e.dataTransfer.getData("application/stimia-node-id");
     
     // Price Book Data Types
-    const pbItemsData = e.dataTransfer.getData("application/edil-price-book-items");
-    const pbItemData = e.dataTransfer.getData("application/edil-price-book-item"); // Fallback single
+    const pbItemsData = e.dataTransfer.getData("application/stimia-price-book-items");
+    const pbItemData = e.dataTransfer.getData("application/stimia-price-book-item"); // Fallback single
     
-    const pbCategoriesData = e.dataTransfer.getData("application/edil-price-book-categories");
-    const pbCategoryData = e.dataTransfer.getData("application/edil-price-book-category"); // Fallback single
+    const pbCategoriesData = e.dataTransfer.getData("application/stimia-price-book-categories");
+    const pbCategoryData = e.dataTransfer.getData("application/stimia-price-book-category"); // Fallback single
 
     if (itemsData) {
         // Multi-item move within editor

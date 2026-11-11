@@ -23,7 +23,7 @@ export interface AuthUser {
 
 type AuthListener = (user: AuthUser | null) => void;
 
-const SESSION_KEY = 'edil_local_session';
+const SESSION_KEY = 'stimia_local_session';
 
 const localListeners = new Set<AuthListener>();
 

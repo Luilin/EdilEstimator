@@ -161,7 +161,7 @@ export async function getProjectsWithCache(): Promise<{ data: Project[]; error: 
 
     // Primo collegamento al cloud: se il database è vuoto, carica i progetti
     // che esistono già in locale (una sola volta per utente).
-    const migrationKey = `edil_cloud_migrated_${user.uid}`;
+    const migrationKey = `stimia_cloud_migrated_${user.uid}`;
     const alreadyMigrated = typeof window !== 'undefined'
       && window.localStorage.getItem(migrationKey) === '1';
 

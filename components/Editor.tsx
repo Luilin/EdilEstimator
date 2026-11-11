@@ -150,7 +150,7 @@ export const Editor: React.FC<EditorProps> = ({ project: initialProject, current
       let priceBooks = initialProject.priceBooks;
       if (!priceBooks || priceBooks.length === 0) {
           if (typeof window !== 'undefined') {
-              const saved = localStorage.getItem('edil_price_books');
+              const saved = localStorage.getItem('stimia_price_books');
               if (saved) {
                   try {
                       priceBooks = JSON.parse(saved);
@@ -187,7 +187,7 @@ export const Editor: React.FC<EditorProps> = ({ project: initialProject, current
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const [sidebarWidth, setSidebarWidth] = useState(() => {
       if (typeof window !== 'undefined') {
-          const saved = localStorage.getItem('edil_editor_sidebar_width');
+          const saved = localStorage.getItem('stimia_editor_sidebar_width');
           return saved ? parseInt(saved, 10) : 450;
       }
       return 450;
@@ -202,7 +202,7 @@ export const Editor: React.FC<EditorProps> = ({ project: initialProject, current
 
   // UOMs
   const [customUoms, setCustomUoms] = useState<string[]>(() => {
-      const saved = localStorage.getItem('edil_uoms');
+      const saved = localStorage.getItem('stimia_uoms');
       return saved ? JSON.parse(saved) : COMMON_UOMS;
   });
   const [showUomModal, setShowUomModal] = useState(false);
@@ -346,11 +346,11 @@ export const Editor: React.FC<EditorProps> = ({ project: initialProject, current
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('edil_editor_sidebar_width', sidebarWidth.toString());
+    localStorage.setItem('stimia_editor_sidebar_width', sidebarWidth.toString());
   }, [sidebarWidth]);
 
   useEffect(() => {
-      localStorage.setItem('edil_uoms', JSON.stringify(customUoms));
+      localStorage.setItem('stimia_uoms', JSON.stringify(customUoms));
   }, [customUoms]);
   
   const startResizing = useCallback((e: React.MouseEvent) => {
@@ -1881,18 +1881,18 @@ export const Editor: React.FC<EditorProps> = ({ project: initialProject, current
                   onDragOver={(e) => {
                       if (editorMode === 'SAL') return;
                       e.preventDefault();
-                      if (e.dataTransfer.types.includes("application/edil-price-book-items") || 
-                          e.dataTransfer.types.includes("application/edil-price-book-item") ||
-                          e.dataTransfer.types.includes("application/edil-items")) {
+                      if (e.dataTransfer.types.includes("application/stimia-price-book-items") || 
+                          e.dataTransfer.types.includes("application/stimia-price-book-item") ||
+                          e.dataTransfer.types.includes("application/stimia-items")) {
                           e.dataTransfer.dropEffect = "copy";
                       }
                   }}
                   onDrop={(e) => {
                       if (editorMode === 'SAL' || e.defaultPrevented) return;
                       e.preventDefault();
-                      const itemsData = e.dataTransfer.getData("application/edil-items");
+                      const itemsData = e.dataTransfer.getData("application/stimia-items");
                       if (itemsData) return;
-                      const pbItemsData = e.dataTransfer.getData("application/edil-price-book-items");
+                      const pbItemsData = e.dataTransfer.getData("application/stimia-price-book-items");
                       if (pbItemsData) {
                           try {
                               const newItems = JSON.parse(pbItemsData);
@@ -1900,7 +1900,7 @@ export const Editor: React.FC<EditorProps> = ({ project: initialProject, current
                           } catch (err) { console.error(err); }
                           return;
                       }
-                      const pbItemData = e.dataTransfer.getData("application/edil-price-book-item");
+                      const pbItemData = e.dataTransfer.getData("application/stimia-price-book-item");
                       if (pbItemData) {
                           try {
                               const newItem = JSON.parse(pbItemData);
@@ -2133,12 +2133,12 @@ export const Editor: React.FC<EditorProps> = ({ project: initialProject, current
                                     e.stopPropagation();
                                     if (!selectedItemIds.has(item.id)) {
                                         setSelectedItemIds(new Set([item.id]));
-                                        e.dataTransfer.setData("application/edil-item-id", item.id);
-                                        e.dataTransfer.setData("application/edil-items", JSON.stringify([item]));
+                                        e.dataTransfer.setData("application/stimia-item-id", item.id);
+                                        e.dataTransfer.setData("application/stimia-items", JSON.stringify([item]));
                                     } else {
                                         const itemsToDrag = selectedNode.items.filter(i => selectedItemIds.has(i.id));
-                                        e.dataTransfer.setData("application/edil-items", JSON.stringify(itemsToDrag));
-                                        e.dataTransfer.setData("application/edil-item-id", item.id);
+                                        e.dataTransfer.setData("application/stimia-items", JSON.stringify(itemsToDrag));
+                                        e.dataTransfer.setData("application/stimia-item-id", item.id);
                                     }
                                     e.dataTransfer.effectAllowed = "move";
                                 }}
@@ -2152,13 +2152,13 @@ export const Editor: React.FC<EditorProps> = ({ project: initialProject, current
                                     if(filterText) return;
                                     e.preventDefault();
                                     e.stopPropagation();
-                                    const sourceId = e.dataTransfer.getData("application/edil-item-id");
+                                    const sourceId = e.dataTransfer.getData("application/stimia-item-id");
                                     if (sourceId && sourceId !== item.id) {
                                         handleReorderItem(sourceId, item.id);
                                         setDragOverItemIndex(null);
                                         return;
                                     }
-                                    const pbItemsData = e.dataTransfer.getData("application/edil-price-book-items");
+                                    const pbItemsData = e.dataTransfer.getData("application/stimia-price-book-items");
                                     if (pbItemsData) {
                                         try {
                                             const newItems = JSON.parse(pbItemsData);
@@ -2167,7 +2167,7 @@ export const Editor: React.FC<EditorProps> = ({ project: initialProject, current
                                         setDragOverItemIndex(null);
                                         return;
                                     }
-                                    const pbItemData = e.dataTransfer.getData("application/edil-price-book-item");
+                                    const pbItemData = e.dataTransfer.getData("application/stimia-price-book-item");
                                     if (pbItemData) {
                                         try {
                                             const newItem = JSON.parse(pbItemData);

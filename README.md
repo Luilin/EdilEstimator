@@ -146,28 +146,29 @@ supabase/schema.sql           Tabelle, indici, trigger e policy RLS
 ## Dati locali
 
 In modalità locale i progetti sono salvati in **IndexedDB** (database
-`edilestimator_files`: store `projects`, `priceBooks`, `attachments`, `versions`,
-`syncQueue`). Il nome del database è storico: è rimasto invariato dopo il
-rebrand per non rendere invisibili i dati già salvati nei browser.
+`stimia_files`: store `projects`, `priceBooks`, `attachments`, `versions`,
+`syncQueue`). Al primo avvio i dati del vecchio database vengono copiati
+automaticamente nel nuovo.
 In `localStorage` restano solo sessione e preferenze:
 
 | Chiave | Contenuto |
 | --- | --- |
-| `edil_local_session` | Utente attualmente autenticato in locale |
-| `edil_editor_sidebar_width` | Larghezza della sidebar dell'editor |
-| `edil_uoms` | Unità di misura personalizzate |
+| `stimia_local_session` | Utente attualmente autenticato in locale |
+| `stimia_editor_sidebar_width` | Larghezza della sidebar dell'editor |
+| `stimia_uoms` | Unità di misura personalizzate |
 
 Per cancellare tutto, dalla console del browser:
 
 ```js
 localStorage.clear();
+indexedDB.deleteDatabase('stimia_files');
 location.reload();
 ```
 
 Per cancellare solo i progetti:
 
 ```js
-indexedDB.deleteDatabase('edilestimator_files');
+indexedDB.deleteDatabase('stimia_files');
 location.reload();
 ```
 

@@ -234,7 +234,7 @@ export const PrintPreview: React.FC<PrintPreviewProps> = ({
     useEffect(() => {
         const fontsToLoad = [...new Set([printTitleFont, printBodyFont])];
         if (fontsToLoad.length === 0) return;
-        const linkId = 'edil-estimator-fonts';
+        const linkId = 'stimia-fonts';
         let link = document.getElementById(linkId) as HTMLLinkElement;
         if (!link) {
             link = document.createElement('link');

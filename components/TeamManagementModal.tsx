@@ -157,18 +157,18 @@ export const TeamManagementModal: React.FC<Props> = ({ project, currentUserEmail
 
   // EmailJS Settings state
   const [showEmailSettings, setShowEmailSettings] = useState(false);
-  const [emailServiceId, setEmailServiceId] = useState(() => localStorage.getItem('edil_emailjs_service_id') || '');
-  const [emailTemplateId, setEmailTemplateId] = useState(() => localStorage.getItem('edil_emailjs_template_id') || '');
-  const [emailPublicKey, setEmailPublicKey] = useState(() => localStorage.getItem('edil_emailjs_public_key') || '');
-  const [emailEnabled, setEmailEnabled] = useState(() => localStorage.getItem('edil_emailjs_enabled') === 'true');
+  const [emailServiceId, setEmailServiceId] = useState(() => localStorage.getItem('stimia_emailjs_service_id') || '');
+  const [emailTemplateId, setEmailTemplateId] = useState(() => localStorage.getItem('stimia_emailjs_template_id') || '');
+  const [emailPublicKey, setEmailPublicKey] = useState(() => localStorage.getItem('stimia_emailjs_public_key') || '');
+  const [emailEnabled, setEmailEnabled] = useState(() => localStorage.getItem('stimia_emailjs_enabled') === 'true');
   const [sendingEmail, setSendingEmail] = useState(false);
   const [emailStatusMessage, setEmailStatusMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 
   const saveEmailSettings = (serviceId: string, templateId: string, publicKey: string, enabled: boolean) => {
-    localStorage.setItem('edil_emailjs_service_id', serviceId);
-    localStorage.setItem('edil_emailjs_template_id', templateId);
-    localStorage.setItem('edil_emailjs_public_key', publicKey);
-    localStorage.setItem('edil_emailjs_enabled', enabled ? 'true' : 'false');
+    localStorage.setItem('stimia_emailjs_service_id', serviceId);
+    localStorage.setItem('stimia_emailjs_template_id', templateId);
+    localStorage.setItem('stimia_emailjs_public_key', publicKey);
+    localStorage.setItem('stimia_emailjs_enabled', enabled ? 'true' : 'false');
     
     setEmailServiceId(serviceId);
     setEmailTemplateId(templateId);

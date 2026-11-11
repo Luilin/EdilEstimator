@@ -15,7 +15,8 @@ import {
  * possono convivere con i computi.
  */
 
-const LEGACY_PROJECTS_KEY = 'edil_local_projects_v1';
+/** Progetti salvati nel vecchio formato localStorage, da importare in IndexedDB. */
+const LEGACY_PROJECTS_KEY = 'stimia_local_projects_v1';
 
 let migrationPromise: Promise<void> | null = null;
 

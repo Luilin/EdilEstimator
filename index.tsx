@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
+import { migrateLegacyStorageKeys } from './services/storageMigration';
+
+// Rinomina le preferenze salvate prima del rebrand (una volta sola).
+migrateLegacyStorageKeys();
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
